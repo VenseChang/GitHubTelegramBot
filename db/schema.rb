@@ -10,10 +10,34 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_03_12_044040) do
+ActiveRecord::Schema.define(version: 2019_03_12_114840) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "githubs", force: :cascade do |t|
+    t.string "login"
+    t.string "node_id"
+    t.string "avatar_url"
+    t.string "gravatar_id"
+    t.string "html_url"
+    t.boolean "site_admin"
+    t.string "name"
+    t.string "company"
+    t.string "blog"
+    t.string "location"
+    t.string "email"
+    t.string "hireable"
+    t.string "bio"
+    t.integer "public_repos"
+    t.integer "public_gists"
+    t.integer "followers"
+    t.integer "following"
+    t.bigint "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_githubs_on_user_id"
+  end
 
   create_table "users", force: :cascade do |t|
     t.boolean "is_bot"
@@ -26,4 +50,5 @@ ActiveRecord::Schema.define(version: 2019_03_12_044040) do
     t.datetime "updated_at", null: false
   end
 
+  add_foreign_key "githubs", "users"
 end
