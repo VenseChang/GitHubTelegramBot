@@ -1,7 +1,7 @@
 database:
 
 # Telegram
-telegram_bot_token:
+github_tg_bot_token:
 
 # GitHub
 github_client_id:
