@@ -10,6 +10,7 @@ gem "figaro"
 gem 'jbuilder', '~> 2.5'
 gem 'pg', '>= 0.18', '< 2.0'
 gem 'puma', '~> 3.11'
+gem 'slim'
 gem 'tg-bot'
 gem 'uglifier', '>= 1.3.0'
 
