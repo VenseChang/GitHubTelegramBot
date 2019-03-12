@@ -14,6 +14,10 @@ gem 'slim'
 gem 'tg-bot'
 gem 'uglifier', '>= 1.3.0'
 
+# Bootstrap * jQuery
+gem 'bootstrap', '~> 4.3.1'
+gem 'jquery-rails'
+
 group :development, :test do
   gem 'pry', '~> 0.12.2'
 end
