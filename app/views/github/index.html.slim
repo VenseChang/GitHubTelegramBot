@@ -9,3 +9,10 @@
       = link_to (image_tag 'github-logo', class: 'logo'), @github.html_url
     - if @github.email.present?
       = link_to (image_tag 'gmail', class: 'logo'), "mailto:#{@github.email}"
+  .repos.mt-3
+    ul.list-group
+      - @github.repos.each do |repo|
+        = link_to repo.html_url, class: 'text-decoration-none' do
+          li.list-group-item
+            h4.text-center = repo.name
+            p.text-dark = repo.description
