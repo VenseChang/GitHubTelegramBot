@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_03_12_114840) do
+ActiveRecord::Schema.define(version: 2019_03_13_034554) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -39,6 +39,18 @@ ActiveRecord::Schema.define(version: 2019_03_12_114840) do
     t.index ["user_id"], name: "index_githubs_on_user_id"
   end
 
+  create_table "repos", force: :cascade do |t|
+    t.string "node_id"
+    t.string "name"
+    t.string "full_name"
+    t.string "html_url"
+    t.string "description"
+    t.bigint "github_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["github_id"], name: "index_repos_on_github_id"
+  end
+
   create_table "users", force: :cascade do |t|
     t.boolean "is_bot"
     t.string "first_name"
@@ -51,4 +63,5 @@ ActiveRecord::Schema.define(version: 2019_03_12_114840) do
   end
 
   add_foreign_key "githubs", "users"
+  add_foreign_key "repos", "githubs"
 end
