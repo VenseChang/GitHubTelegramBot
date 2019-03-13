@@ -9,7 +9,10 @@
     <%= javascript_include_tag 'application'%>
   </head>
 
-  <body>
-    <%= yield %>
+  <body class="bg-dark">
+    <%= render  "shared/header" %>
+    <div class="m-4 p-4 bg-white main-container">
+      <%= yield %>
+    </div>
   </body>
 </html>

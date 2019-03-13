@@ -1,17 +1,29 @@
 require 'net/http'
 
 class GithubController < ApplicationController
+  before_action :setup_user
+
   def login
-    @user = User.find_by_id(params[:user_id])
     github_params = access_token(params[:code])
-    @github = user_github_create_or_update(user: @user, params: github_params)
+    user_github_create_or_update(user: @user, params: github_params)
+
+    redirect_to github_index_path(user_id: @user.id)
+  end
+
+  def index
+    @github = @user.github
   end
 
   private
 
+    def setup_user
+      @user = User.includes(:github).find_by_id(params[:user_id])
+    end
+
     def user_github_create_or_update(user:, params:)
       if user.github.blank?
-        user.build_github(params)
+        github = user.build_github(params)
+        github.save
       else
         user.github.update(params)
       end
@@ -33,7 +45,7 @@ class GithubController < ApplicationController
       # Get user info
       url = "https://api.github.com/user?access_token=#{access_token}"
       res = request_get(url: url)
-      
+
       JSON.parse(res.body).except("type",
                                   "url",
                                   "followers_url",
@@ -54,7 +66,7 @@ class GithubController < ApplicationController
         uri.query = URI.encode_www_form(options[:params]) 
       end
 
-      ::Net::HTTP.get_response(uri)
+      Net::HTTP.get_response(uri)
     end
 
     def format_url_params(parameter)

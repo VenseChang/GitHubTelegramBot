@@ -16,7 +16,7 @@ class WebhookController < ApplicationController
   private
 
     def setup_user
-      User.first_or_create(user_params)
+      User.find_or_create_by(user_params)
     end
 
     def user_params

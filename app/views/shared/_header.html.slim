@@ -1,0 +1,4 @@
+nav.navbar.navbar-light.bg-light
+  = link_to github_index_path(user_id: @user.id), class: 'navbar-brand' do
+    = image_tag 'octocat.png', class: 'd-inline-block align-top', height: '30', alt: 'octocat'
+    span.ml-2 GitHub Info

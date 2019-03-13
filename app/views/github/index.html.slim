@@ -1,0 +1,11 @@
+.user
+  = image_tag @github.avatar_url, class: 'rounded-circle avatar'
+
+.user-info
+  h2.text-center.mt-3
+    = @github.login
+  .contact
+    - if @github.html_url.present?
+      = link_to (image_tag 'github-logo', class: 'logo'), @github.html_url
+    - if @github.email.present?
+      = link_to (image_tag 'gmail', class: 'logo'), "mailto:#{@github.email}"
